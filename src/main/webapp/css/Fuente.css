@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+h1 {
+  color: black;
+  text-align: center;
+  font-family: consolas;
+  font-size: 30px;
+}
+
+form{
+	text-align: center;
+}
+
+input[name="boton"] 
+{
+  background: blue;
+  color: white;
+}
