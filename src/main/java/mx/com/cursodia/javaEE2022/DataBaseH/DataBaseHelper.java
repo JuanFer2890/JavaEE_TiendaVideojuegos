@@ -50,7 +50,7 @@ public class DataBaseHelper
 		catch(SQLException e)
 		{
 			System.out.println("Error accediendo a la BD "+e.getMessage());
-			throw new DataBaseException("Error de SQL");
+			throw new DataBaseException("Error de SQL",e);
 		}
 		finally
 		{
@@ -67,7 +67,7 @@ public class DataBaseHelper
 		return filas;
 	}
 	
-	public List<Videojuego> seleccionarVideojuegos(String query) throws SQLException, DataBaseException
+	public List<Videojuego> seleccionarVideojuegos(String query) throws DataBaseException
 	{
 		Connection con = null;
 		Statement stm = null;
