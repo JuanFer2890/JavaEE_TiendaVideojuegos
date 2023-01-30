@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html = lang "es">
 
@@ -11,7 +12,13 @@
 		<meta charset="utf-8"/>
 	</head>
 	<body>
-		<div class="container-pt-4">
+		<%@ page import=" java.util.Objects"%>
+		<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
+		<%	
+			String clave = request.getParameter("CVE");
+			if(Objects.isNull(clave))
+			{
+				%><div class="container-pt-4">
 			<div class="row">
 				<div class="card text-center">
 					<div class="card-body">
@@ -43,17 +50,15 @@
 					</div>
 				</div>
 			</div>
+			<%
+			}
+			else
+			{
+				int cve = Integer.parseInt(clave);
+				Videojuego V = Videojuego.seleccionarVideojuego(cve);
+			}
+		 %>
+		
 		</div>
-		<!--
-		<h1>Formulario alta de nuevo Videojuego</h1>
-		<form name="PrimerFormulario">
-			CLAVE: 
-			<input type="text" name = "cve"><br><br>
-			TITULO:
-			<input type="text" name = "titulo"><br><br>
-			PRECIO:
-			<input type="text" name = "precio"><br><br>
-			<input type="button" name="boton" value = "Insertar" onclick="validar()">
-		</form>-->
 	</body>
 </html>

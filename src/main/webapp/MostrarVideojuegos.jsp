@@ -13,41 +13,25 @@
  </select>
  <br>
 <%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
-<%@ page import ="java.sql.ResultSet"%>
-<%@ page import ="java.sql.SQLException"%>
+<%@ page import ="java.util.List"%>
 <%
-ResultSet rs = null;
 	
-	try
+	List<Videojuego> lista = Videojuego.buscarTodos();
+	
+	//recorrer
+	for(Videojuego v:lista)
 	{
-		rs = Videojuego.buscarTodos();
-		
-		//recorrer
-		while(rs.next())
-		{
-			%><!-- aqui se meten comandos con el ResultSet y son independientes cada uno -->
-			<%= rs.getInt("cve_vid") %>
-			<%= rs.getString("tit_vid") %>
-			<%= rs.getFloat("pre_vid") %>
-			<%= rs.getInt("cveprov_vid") %>
-			<%= rs.getInt("inv_vid") %>
-			
-			<p><a href="#" onClick="alertar;">Click Me</a></p>
-			<script type="text/javascript">
-				alertar;
-			</script>
-			<br/>
-			<%
-		}
-		
-	}catch(SQLException e)
-	{
-		System.out.println("Error al acceder a la base de datos"+e.getMessage());
+		%><!-- aqui se meten comandos con el ResultSet y son independientes cada uno -->
+		<%= v.getCve_vid() %>
+		<%= v.getTit_vid() %>
+		<%= v.getPre_vid() %>
+		<%= v.getCvepro_vid() %>
+		<%= v.getInv_vid() %>
+		<input type="button" class="edit" value="Editar" onclick="location.href= 'FormularioInsertarVideojuego.jsp?CVE=<%=v.getCve_vid()%>'"/>
+		<br/>
+		<%
 	}
-	finally
-	{
-		if(rs != null) rs.close();
-	}
+	
 	//response.sendRedirect("MostrarVideojuegos.jsp");
 	
 	

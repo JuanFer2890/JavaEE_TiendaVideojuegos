@@ -2,7 +2,9 @@ package mx.com.cursodia.javaEE2022.Beans;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseHelper;
 
 public class Videojuego 
@@ -62,12 +64,11 @@ public class Videojuego
 		return cve_vid;
 	}
 	
-	public static ResultSet buscarTodosLosProveedores() throws SQLException
+	public static List<Videojuego> buscarTodosLosProveedores() throws SQLException
 	{
 		String query = "SELECT DISTINCT cveprov_vid FROM videojuegos";
-		DataBaseHelper dbh = new DataBaseHelper();
-		ResultSet rs = dbh.seleccionarVideojuegos(query);
-		return rs;
+		DataBaseHelper dbh = new DataBaseHelper(); 
+		return dbh.seleccionarVideojuegos(query);
 	}
 	
 	public static void insertar(int cve, String titulo, float precio, int cveprov, int inventario) throws SQLException
@@ -80,11 +81,32 @@ public class Videojuego
 		
 	}
 	
-	public static ResultSet buscarTodos() throws SQLException
+	public static List<Videojuego> buscarTodos() throws SQLException
 	{
 		String query = "SELECT * FROM videojuegos";
 		DataBaseHelper dbh = new DataBaseHelper();
 		return dbh.seleccionarVideojuegos(query);
+	}
+	
+	public static Videojuego seleccionarVideojuego(int cve) throws SQLException, DataBaseException
+	{
+		String query = "SELECT * FROM videojuegos WHERE cve_vid="+cve;
+		DataBaseHelper dbh = new DataBaseHelper();
+		List<Videojuego> lista = dbh.seleccionarVideojuegos(query);
+		//ESTO NOS PUEDE DAR UN UNCHECKED EXCEPTION
+		return lista.get(0);
+	}
+	
+	public int actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws SQLException
+	{
+		String query = "UPDATE videojuegos SET tit_vid ='"+titulo+"',pre_vid="+precio+","
+				+ "cveprov_vid="+cveprov+",inv_vid="+inventario+" WHERE cve_vid ="+cve;
+		
+		DataBaseHelper dbh = new DataBaseHelper();
+		
+		int n =dbh.modificarVideojuego(query);
+		
+		return n;
 	}
 	
 }

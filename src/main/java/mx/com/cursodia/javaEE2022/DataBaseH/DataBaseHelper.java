@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import mx.com.cursodia.javaEE2022.Beans.Videojuego;
 
 public class DataBaseHelper 
 {
@@ -27,7 +31,7 @@ public class DataBaseHelper
 		return stm;
 	}
 
-	public int modificarVideojuego(String query) throws SQLException
+	public int modificarVideojuego(String query) throws DataBaseException
 	{
 		
 		int filas = 0;
@@ -40,25 +44,35 @@ public class DataBaseHelper
 			
 		}catch(ClassNotFoundException e)
 		{
-			System.out.println("Error al cargar el driver "+e.getMessage());
+			System.out.println("Clase no encontrada "+e.getMessage());
+			throw new DataBaseException("Clase no encontrada");
 		}
 		catch(SQLException e)
 		{
 			System.out.println("Error accediendo a la BD "+e.getMessage());
+			throw new DataBaseException("Error de SQL");
 		}
 		finally
 		{
-			if(stm != null) stm.close();
-			if(con != null) con.close();
+				try 
+				{
+					if(stm != null) stm.close();
+					if(con != null) con.close();
+				} 
+				catch (SQLException e) 
+				{
+					e.printStackTrace();
+				}
 		}
 		return filas;
 	}
 	
-	public ResultSet seleccionarVideojuegos(String query) throws SQLException
+	public List<Videojuego> seleccionarVideojuegos(String query) throws SQLException, DataBaseException
 	{
 		Connection con = null;
 		Statement stm = null;
 		ResultSet rs = null;
+		List<Videojuego> lista = new ArrayList<Videojuego>();
 		
 		try {
 			Class.forName(DRIVER);					//	usuario,contrasena
@@ -66,20 +80,34 @@ public class DataBaseHelper
 			stm = con.createStatement();
 			rs = stm.executeQuery(query);
 			
+			while(rs.next())
+			{//poblamos la lista
+				lista.add(new Videojuego(rs.getInt("cve_vid"),rs.getString("tit_vid"),rs.getFloat("pre_vid"),
+						rs.getInt("cveprov_vid"), rs.getInt("inv_vid")));
+			}
 		}catch(ClassNotFoundException e)
 		{
-			System.out.println("Error al cargar el driver "+e.getMessage());
+			System.out.println("Clase no encontrada "+e.getMessage());
+			throw new DataBaseException("Clase no encontrada");
 		}
 		catch(SQLException e)
 		{
 			System.out.println("Error accediendo a la BD "+e.getMessage());
+			throw new DataBaseException("Error de SQL");
 		}
 		finally
 		{
-			//if(stm != null) stm.close();
-			//if(con != null) con.close();
+				try 
+				{
+					if(stm != null) stm.close();
+					if(con != null) con.close();
+				} 
+				catch (SQLException e) 
+				{
+					e.printStackTrace();
+				}
 		}
-		return rs;
+		return lista;
 	}
 	
 }
