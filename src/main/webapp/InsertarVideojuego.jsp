@@ -12,6 +12,15 @@
 	int cveprov = Integer.parseInt(request.getParameter("CVEPROV"));
 	int inventario = Integer.parseInt(request.getParameter("INV"));
 	
-	Videojuego.insertar(cve, titulo, precio, cveprov, inventario);
+	if(request.getParameter("MOD")=="True")
+	{
+		Videojuego.actualizarVideoJuego(cve, titulo, precio, cveprov, inventario);
+	}
+	else
+	{
+		Videojuego.insertar(cve, titulo, precio, cveprov, inventario);
+	}
 	
+	
+	response.sendRedirect("MostrarVideojuegos.jsp");
 %>

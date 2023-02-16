@@ -12,8 +12,11 @@
 		<meta charset="utf-8"/>
 	</head>
 	<body>
-		<%@ page import=" java.util.Objects"%>
+		<%@ page import= "java.util.Objects"%>
+		<%@ page import= "java.util.List" %>
+		<%@ page import ="java.util.stream.Collectors"%>
 		<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
+		<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
 		<%	
 			String clave = request.getParameter("CVE");
 			if(Objects.isNull(clave))
@@ -37,15 +40,26 @@
 							<label for="PRE">Precio</label>
 							<input type="precio" class="form-control" id = "PRE" placeholder="Precio del titulo">
 						</div>
-						<div class="row">
-							<label for="CVEPROV">Proveedor</label>
-							<input type="claveProveedor" class="form-control" id = "CVEPROV" placeholder="Proveedor del videojuego">
+						<div>
+							<select name="comboBox" id="CVEPROV">
+							<%
+							//STREAM PARA TRAER SOLAMENTE LOS NOMBRES
+								
+								List<Proveedor> lista = Proveedor.buscarTodos();
+								for(Proveedor v:lista)
+								{%>
+									<option value="<%=v.getCve_prov()%>"><%=v.getNom_prov()%></option>
+								<%}
+									
+							%>
+							</select>
 						</div>
 						<div class="row">
 							<label for="INV">Inventario</label>
 							<input type="inventario" class="form-control" id = "INV" placeholder="Stock del producto">
 						</div>
-						<button type="submit" class="btn btn-primary" onclick="validar();">Guardar</button>
+						<%%>
+						<button type="submit" class="btn btn-primary" onclick="validar(); ">Guardar</button>
 						
 					</form>
 					</div>
@@ -57,7 +71,53 @@
 			{
 				int cve = Integer.parseInt(clave);
 				Videojuego V = Videojuego.seleccionarVideojuego(cve);
-				%><p>La clave es: </p><%=cve%> <%
+				%>
+				<div class="container-pt-4">
+				<div class="row">
+				<div class="card text-center">
+					<div class="card-body">
+					<h1>Formulario alta de nuevo Videojuego</h1>
+					<form action ="InsertarVideojuego.do" method="GET" Class="mt-4">
+						<div class="row">
+							<label for="CVE">Clave</label>
+							<input type="clave" class="form-control" id = "CVE" placeholder="Clave del videojuego" value = "<%=V.getCve_vid()%>">
+						</div>
+						<div class="row">
+							<label for="TIT">Titulo</label>
+							<input type="titulo" class="form-control" id = "TIT" placeholder="Titulo del videojuego" value = "<%=V.getTit_vid()%>">
+						</div>
+						<div class="row">
+							<label for="PRE">Precio</label>
+							<input type="precio" class="form-control" id = "PRE" placeholder="Precio del titulo" value = "<%=V.getPre_vid()%>">
+						</div>
+						<div>
+							<select name="comboBox" id="CVEPROV">
+							<%
+							//STREAM PARA TRAER SOLAMENTE LOS NOMBRES
+								
+								List<Proveedor> lista = Proveedor.buscarTodos();
+								for(Proveedor v:lista)
+								{%>
+									<option value="<%=v.getCve_prov()%>"><%=v.getNom_prov()%></option>
+								<%}
+									
+							%>
+							</select>
+						</div>
+						<div class="row">
+							<label for="INV">Inventario</label>
+							<input type="inventario" class="form-control" id = "INV" placeholder="Stock del producto" value = "<%=V.getInv_vid()%>">
+						</div>
+						<%%>
+						<button type="submit" class="btn btn-primary" onclick="actualizar(); ">Actualizar</button>
+						
+					</form>
+					</div>
+				</div>
+			</div>
+				
+				
+				<%
 			}
 		 %>
 		</div>

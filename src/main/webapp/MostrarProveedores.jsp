@@ -12,22 +12,21 @@
     <option value="todos">Todos</option>
  </select>
  <br>
-<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
+<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
 <%@ page import ="java.util.List"%>
 <%
 	
-	List<Videojuego> lista = Videojuego.buscarTodos();
+	List<Proveedor> lista = Proveedor.buscarTodos();
 	
 	//recorrer
-	for(Videojuego v:lista)
+	for(Proveedor v:lista)
 	{
 		%><!-- aqui se meten comandos con el ResultSet y son independientes cada uno -->
-		<%= v.getCve_vid() %>
-		<%= v.getTit_vid() %>
-		<%= v.getPre_vid() %>
-		<%= v.getCvepro_vid() %>
-		<%= v.getInv_vid() %>
-		<input type="button" class="edit" value="Editar" onclick="location.href= 'FormularioInsertarVideojuego.jsp?CVE=<%=v.getCve_vid()%>'"/>
+		<%= v.getNom_prov() %>
+		<%= v.getEmail_prov() %>
+		<%= v.getTel_prov() %>
+		<%= v.getCve_prov() %>
+		<input type="button" class="edit" value="Editar" onclick="location.href= 'FormularioInsertarVideojuego.jsp?CVE=<%=v.getCve_prov()%>'"/>
 		<input type="button" class="delete" value="Borrar" onclick="alertar();"/>
 		<br/>
 		<%
@@ -38,7 +37,7 @@
 	
 %>
 <!-- Hacer un link para que podamos acceder desde aqui -->
-<a href="FormularioInsertarVideojuego.jsp">Inserta Videojuego</a>
-<a href="MostrarProveedores.jsp">Mostrar Proveedores</a>
+<a href="FormularioInsertarProveedor.jsp">Inserta Proveedor</a>
+<a href="MostrarVideojuegos.jsp">Mostrar Videojuegos</a>
 </body>
 </html>

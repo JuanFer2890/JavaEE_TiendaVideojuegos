@@ -1,7 +1,5 @@
 package mx.com.cursodia.javaEE2022.Beans;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
@@ -68,16 +66,16 @@ public class Videojuego
 	{
 		String query = "SELECT DISTINCT cveprov_vid FROM videojuegos";
 		DataBaseHelper dbh = new DataBaseHelper(); 
-		return dbh.seleccionarVideojuegos(query);
+		return dbh.seleccionarBean(query);
 	}
 	
 	public static void insertar(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException
 	{
-		String query = "INSERT INTO videojuegos (cve_vid, tit_vid, pre_vid, cveprov_vid, inv_vid, wetr) VALUES ";
+		String query = "INSERT INTO videojuegos (cve_vid, tit_vid, pre_vid, cveprov_vid, inv_vid) VALUES ";
 		query += "("+cve+",'"+titulo+"',"+precio+","+cveprov+","+inventario+")";
 		
 		DataBaseHelper dbh = new DataBaseHelper();
-		dbh.modificarVideojuego(query);
+		dbh.modificarBean(query);
 		
 	}
 	
@@ -85,26 +83,26 @@ public class Videojuego
 	{
 		String query = "SELECT * FROM videojuegos";
 		DataBaseHelper dbh = new DataBaseHelper();
-		return dbh.seleccionarVideojuegos(query);
+		return dbh.seleccionarBean(query);
 	}
 	
 	public static Videojuego seleccionarVideojuego(int cve) throws DataBaseException
 	{
 		String query = "SELECT * FROM videojuegos WHERE cve_vid="+cve;
 		DataBaseHelper dbh = new DataBaseHelper();
-		List<Videojuego> lista = dbh.seleccionarVideojuegos(query);
+		List<Videojuego> lista = dbh.seleccionarBean(query);
 		//ESTO NOS PUEDE DAR UN UNCHECKED EXCEPTION
 		return lista.get(0);
 	}
 	
-	public int actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException
+	public static int actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException
 	{
 		String query = "UPDATE videojuegos SET tit_vid ='"+titulo+"',pre_vid="+precio+","
 				+ "cveprov_vid="+cveprov+",inv_vid="+inventario+" WHERE cve_vid ="+cve;
 		
 		DataBaseHelper dbh = new DataBaseHelper();
 		
-		int n =dbh.modificarVideojuego(query);
+		int n =dbh.modificarBean(query);
 		
 		return n;
 	}

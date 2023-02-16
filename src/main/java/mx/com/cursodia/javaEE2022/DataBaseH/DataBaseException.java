@@ -4,7 +4,7 @@ public class DataBaseException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 
-	Exception cause;
+	private Exception cause;
 	public DataBaseException() 
 	{
 		//asi se invoca el constructor de la clase padre

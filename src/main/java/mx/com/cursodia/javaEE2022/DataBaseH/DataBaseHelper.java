@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.com.cursodia.javaEE2022.Beans.Proveedor;
 import mx.com.cursodia.javaEE2022.Beans.Videojuego;
 
-public class DataBaseHelper 
+public class DataBaseHelper <T>
 {
 	//private significa que hay que hacer una instancia de esta clase para acceder a esa variable
 	//static significa que ya existe desde que arranca el sistema
@@ -20,8 +21,8 @@ public class DataBaseHelper
 	private static final String USUARIO = "root";
 	private static final String CLAVE = "";
 	
-	Connection con = null;
-	Statement stm = null;
+	private Connection con = null;
+	private Statement stm = null;
 	
 	public Connection getCon() {
 		return con;
@@ -31,7 +32,7 @@ public class DataBaseHelper
 		return stm;
 	}
 
-	public int modificarVideojuego(String query) throws DataBaseException
+	public int modificarBean(String query) throws DataBaseException
 	{
 		
 		int filas = 0;
@@ -67,12 +68,15 @@ public class DataBaseHelper
 		return filas;
 	}
 	
-	public List<Videojuego> seleccionarVideojuegos(String query) throws DataBaseException
+	//private T gen;
+	//USANDO GENERICOS, REGRESA UN BEAN SIN IMPORTAR DE QUE TIPO SEA
+	public List<T> seleccionarBean(String query) throws DataBaseException
 	{
 		Connection con = null;
 		Statement stm = null;
 		ResultSet rs = null;
-		List<Videojuego> lista = new ArrayList<Videojuego>();
+		//List<Videojuego> lista = new ArrayList<Videojuego>();
+		ArrayList<T> lista = new ArrayList<T>();
 		
 		try {
 			Class.forName(DRIVER);					//	usuario,contrasena
@@ -80,11 +84,24 @@ public class DataBaseHelper
 			stm = con.createStatement();
 			rs = stm.executeQuery(query);
 			
-			while(rs.next())
-			{//poblamos la lista
-				lista.add(new Videojuego(rs.getInt("cve_vid"),rs.getString("tit_vid"),rs.getFloat("pre_vid"),
-						rs.getInt("cveprov_vid"), rs.getInt("inv_vid")));
+			if(query.contains("videojuegos"))
+			{
+				while(rs.next())
+				{//poblamos la lista
+					lista.add((T) new Videojuego(rs.getInt("cve_vid"),rs.getString("tit_vid"),rs.getFloat("pre_vid"),
+							rs.getInt("cveprov_vid"), rs.getInt("inv_vid")));
+				}
 			}
+			else if(query.contains("proveedores"))
+			{
+				while(rs.next())
+				{//poblamos la lista
+					lista.add((T) new Proveedor(rs.getInt("cve_prov"),rs.getString("nom_prov"),
+							rs.getString("email_prov"),rs.getString("tel_prov")));
+				}
+
+			}
+			
 		}catch(ClassNotFoundException e)
 		{
 			System.out.println("Clase no encontrada "+e.getMessage());
