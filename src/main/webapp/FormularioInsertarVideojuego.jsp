@@ -77,7 +77,7 @@
 				<div class="card text-center">
 					<div class="card-body">
 					<h1>Formulario alta de nuevo Videojuego</h1>
-					<form action ="InsertarVideojuego.do" method="GET" Class="mt-4">
+					<form action ="InsertarVideojuego.jsp" method="GET" Class="mt-4">
 						<div class="row">
 							<label for="CVE">Clave</label>
 							<input type="clave" class="form-control" id = "CVE" placeholder="Clave del videojuego" value = "<%=V.getCve_vid()%>">

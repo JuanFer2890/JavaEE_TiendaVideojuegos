@@ -1,5 +1,7 @@
 package mx.com.cursodia.javaEE2022.DataBaseH;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -103,6 +105,79 @@ public class DataBaseHelper <T>
 			}
 			
 		}catch(ClassNotFoundException e)
+		{
+			System.out.println("Clase no encontrada "+e.getMessage());
+			throw new DataBaseException("Clase no encontrada");
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Error accediendo a la BD "+e.getMessage());
+			throw new DataBaseException("Error de SQL");
+		}
+		finally
+		{
+				try 
+				{
+					if(stm != null) stm.close();
+					if(con != null) con.close();
+				} 
+				catch (SQLException e) 
+				{
+					e.printStackTrace();
+				}
+		}
+		return lista;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<T> seleccionarRegistros(String query, Class clase) throws DataBaseException
+	{
+		//Connection con = null;
+		//Statement stm = null;
+		ResultSet rs = null;
+		//List<Videojuego> lista = new ArrayList<Videojuego>();
+		List<T> lista = new ArrayList<T>();
+		
+		try {
+			stm = con.createStatement();
+			rs = stm.executeQuery(query);
+			
+			while(rs.next())
+			{
+			//	trae toda la ruta.urga dentro de la ruta una clase que se llame(nombre de clase)
+				T objeto = (T) Class.forName(clase.getName())
+							.getDeclaredConstructor().newInstance();
+							//hacer una nueva instancia
+				
+						//	Videojuego.localizacion.traer y listar sus metodos
+				Method[] metodos = objeto.getClass().getDeclaredMethods();
+				//no es tipo string porque no solo son sus nombres, sino tambien son objetos
+				
+				for(int i=0; i<metodos.length;i++)
+				{
+					if(metodos[i].getName().startsWith("set"))
+					{//		invoca el metodo(de donde?,traer el nombre QUITANDOLE "set"
+						metodos[i].invoke(objeto, 
+								rs.getObject(metodos[i].getName().substring(3)) );
+					}
+					else if(objeto.getClass().getName().equals("java.lang.Integer"))
+					{
+						objeto = (T)(""+rs.getInt("cat_lib"));
+					}
+					
+					lista.add(objeto);
+				}
+
+			}
+			
+		}
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+			| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		catch(ClassNotFoundException e)
 		{
 			System.out.println("Clase no encontrada "+e.getMessage());
 			throw new DataBaseException("Clase no encontrada");
