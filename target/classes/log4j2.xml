@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Appenders>
+		<Console name="LogToConsole" tarjet="SYSTEM_OUT">
+		<!-- 					como quiero el formato 					anexamos msg y salto de linea-->
+			<PatternLayout pattern="%d{HH:mm:SSS} [%t] %-5level %Logger{36} - %msg%n"/>
+		</Console>
+		<File name="LogToFile" fileName="Logs/app.Log">
+			<PatternLayout>
+				<Pattern>%d %p %c {1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+		</File>
+	</Appenders>
+	
+	<!-- "ref=" significa la direccion de donde pueden surgir los errores -->
+	
+	<!-- Manejar los loggers para darle instrucciones a un nivel superior -->
+	<Loggers>												<!-- para que cada que arranque el server -->
+															<!-- agregue los errores pasados si fuera true -->
+																<!-- el false crea un nuevo archivo -->
+		<Logger name="mx.com.cursodia.javaEE2022" level="debug" additivity="false">
+		<!-- a que apenders puede tener acceso este logger y pos le decimos que a los dos que creamos -->
+			<AppenderRef ref="LogToFile"/>
+			<AppenderRef ref="LogToConsole"/>			
+		</Logger>						<!-- estos son los mas graves -->
+		<Logger name="org.springframework.boot" level="error" additivity="false">
+			<AppenderRef ref="LogToConsola"/><!-- que los lance a comsola -->
+		</Logger>
+		<!-- general: si el msg de error viene de alguna otra cosa que no sean estas dos dependencias -->
+		<Root level="error">			<!-- lo agarra el Root y lo manda a archivo y luego a consola -->
+			<AppenderRef ref="LogToFile"/>
+			<AppenderRef ref="LogToConsole"/>
+		</Root>
+	</Loggers>
+	
+	
+</Configuration>
