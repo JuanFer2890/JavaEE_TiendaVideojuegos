@@ -12,9 +12,11 @@ function validar()
 	}	
 	else
 	{
+		console.log("se van a enviar los campos");
 		document.forms[0].action = "InsertarVideojuego.jsp?CVE="+n1+"&TIT="+n2+"&PRE="+n3+"&CVEPROV="+n4+"&INV="+n5;
 		document.forms[0].method = "post";
 		document.forms[0].submit();
+		console.log("campos enviados!");
 		alert("Videojuego registrado!");
 	}
 }
