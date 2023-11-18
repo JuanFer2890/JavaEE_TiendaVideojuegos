@@ -27,25 +27,25 @@
 				<div class="card text-center">
 					<div class="card-body">
 					<h1>Formulario alta de nuevo Videojuego</h1>
-					<form action ="InsertarVideojuego.do" method="GET" Class="mt-4">
+					<form action ="EjecutarInserccionVideojuego.do" method="GET" Class="mt-4">
 						<div class="row">
 							<label for="CVE">Clave</label>
-							<input type="clave" class="form-control" id = "CVE" placeholder="Clave del videojuego">
+							<input type="clave" class="form-control" name="CVE" id = "CVE" placeholder="Clave del videojuego">
 						</div>
 						<div class="row">
 							<label for="TIT">Titulo</label>
-							<input type="titulo" class="form-control" id = "TIT" placeholder="Titulo del videojuego">
+							<input type="titulo" class="form-control" name = "TIT" id = "TIT" placeholder="Titulo del videojuego">
 						</div>
 						<div class="row">
 							<label for="PRE">Precio</label>
-							<input type="precio" class="form-control" id = "PRE" placeholder="Precio del titulo">
+							<input type="precio" class="form-control" name = "PRE" id = "PRE" placeholder="Precio del titulo">
 						</div>
 						<div>
-							<select name="comboBox" id="CVEPROV">
+							<select name="CVEPROV" id="CVEPROV">
 							<%
 							//STREAM PARA TRAER SOLAMENTE LOS NOMBRES
 								
-								List<Proveedor> lista = Proveedor.buscarTodos();
+								List<Proveedor> lista = (List<Proveedor>) request.getAttribute("listaDeProveedores");
 								for(Proveedor v:lista)
 								{%>
 									<option value="<%=v.getCve_prov()%>"><%=v.getNom_prov()%></option>
@@ -56,10 +56,10 @@
 						</div>
 						<div class="row">
 							<label for="INV">Inventario</label>
-							<input type="inventario" class="form-control" id = "INV" placeholder="Stock del producto">
+							<input type="inventario" class="form-control" name = "INV" id = "INV" placeholder="Stock del producto">
 						</div>
 						<%%>
-						<button type="submit" class="btn btn-primary" onclick="validar(); ">Guardar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
 						
 					</form>
 					</div>
@@ -76,26 +76,27 @@
 				<div class="row">
 				<div class="card text-center">
 					<div class="card-body">
-					<h1>Formulario alta de nuevo Videojuego</h1>
-					<form action ="InsertarVideojuego.jsp" method="GET" Class="mt-4">
+					<h1>Formulario Modificar Videojuego</h1>
+					<form action ="EjecutarInserccionVideojuego.do?MOD&CVE=<%=V.getCve_vid()%>&TIT=<%=V.getTit_vid()%>&PRE=<%=V.getPre_vid()%>&CVEPROV=<%=V.getCvepro_vid()%>&INV=<%=V.getInv_vid()%>" method="GET" Class="mt-4">
+						<input type="hidden" name="MOD" value="<%=true%>"><!-- Esto es para asignar un valor true a MOD -->
 						<div class="row">
 							<label for="CVE">Clave</label>
-							<input type="clave" class="form-control" id = "CVE" placeholder="Clave del videojuego" value = "<%=V.getCve_vid()%>">
+							<input type="clave" class="form-control" name="CVE" id = "CVE" placeholder="Clave del videojuego" value = "<%=V.getCve_vid()%>">
 						</div>
 						<div class="row">
 							<label for="TIT">Titulo</label>
-							<input type="titulo" class="form-control" id = "TIT" placeholder="Titulo del videojuego" value = "<%=V.getTit_vid()%>">
+							<input type="titulo" class="form-control" name = "TIT" id = "TIT" placeholder="Titulo del videojuego" value = "<%=V.getTit_vid()%>">
 						</div>
 						<div class="row">
 							<label for="PRE">Precio</label>
-							<input type="precio" class="form-control" id = "PRE" placeholder="Precio del titulo" value = "<%=V.getPre_vid()%>">
+							<input type="precio" class="form-control" name = "PRE" id = "PRE" placeholder="Precio del titulo" value = "<%=V.getPre_vid()%>">
 						</div>
 						<div>
-							<select name="comboBox" id="CVEPROV">
+							<select name="CVEPROV" id="CVEPROV">
 							<%
 							//STREAM PARA TRAER SOLAMENTE LOS NOMBRES
 								
-								List<Proveedor> lista = Proveedor.buscarTodos();
+								List<Proveedor> lista = (List<Proveedor>) request.getAttribute("listaDeProveedores");
 								for(Proveedor v:lista)
 								{%>
 									<option value="<%=v.getCve_prov()%>"><%=v.getNom_prov()%></option>
@@ -106,10 +107,10 @@
 						</div>
 						<div class="row">
 							<label for="INV">Inventario</label>
-							<input type="inventario" class="form-control" id = "INV" placeholder="Stock del producto" value = "<%=V.getInv_vid()%>">
+							<input type="inventario" class="form-control" name = "INV" id = "INV" placeholder="Stock del producto" value = "<%=V.getInv_vid()%>">
 						</div>
-						<%%>
-						<button type="submit" class="btn btn-primary" onclick="actualizar(); ">Actualizar</button>
+						<button type="submit" class="btn btn-primary">Actualizar</button>
+						<!--<button type="submit" class="btn btn-primary" onclick="actualizar(); ">Actualizar</button> -->
 						
 					</form>
 					</div>

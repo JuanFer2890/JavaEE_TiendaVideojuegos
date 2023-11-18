@@ -62,6 +62,12 @@ public class Videojuego
 		return cve_vid;
 	}
 	
+	@Override
+	public String toString() {
+		return "Videojuego [cve_vid=" + cve_vid + ", tit_vid=" + tit_vid + ", pre_vid=" + pre_vid + ", cvepro_vid="
+				+ cvepro_vid + ", inv_vid=" + inv_vid + "]";
+	}
+
 	public static List<Videojuego> buscarTodosLosProveedores() throws DataBaseException
 	{
 		String query = "SELECT DISTINCT cveprov_vid FROM videojuegos";
@@ -93,6 +99,21 @@ public class Videojuego
 		List<Videojuego> lista = dbh.seleccionarBean(query);
 		//ESTO NOS PUEDE DAR UN UNCHECKED EXCEPTION
 		return lista.get(0);
+	}
+	
+	public static List<Videojuego> filtrarPorProveedor(int cveprov) throws DataBaseException
+	{//cveprov es la clave del proveedor por la cual se va a filtrar
+		String query = "SELECT * FROM videojuegos WHERE cveprov_vid="+cveprov;
+		DataBaseHelper dbh = new DataBaseHelper();
+		List<Videojuego> lista = dbh.seleccionarBean(query);
+		return lista;
+	}
+	
+	public static void borrarVideojuego(int cve) throws DataBaseException
+	{//cveprov es la clave del proveedor por la cual se va a filtrar
+		String query = "DELETE FROM videojuegos WHERE cve_vid="+cve;
+		DataBaseHelper dbh = new DataBaseHelper();
+		dbh.modificarBean(query);
 	}
 	
 	public static int actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException

@@ -60,12 +60,20 @@ public class Proveedor
 		return cve_prov;
 	}
 
+	@Override
+	public String toString() {
+		return "Proveedor [cve_prov=" + cve_prov + ", nom_prov=" + nom_prov + ", email_prov=" + email_prov
+				+ ", tel_prov=" + tel_prov + "]";
+	}
+
+	//CHECAR POR QUE ES NECESARIO ESTE METODO-------------------------------------------------
 	public static List<Proveedor> buscarTodosLosProveedores() throws DataBaseException
 	{
 		String query = "SELECT DISTINCT cveprov_vid FROM proveedores";
 		DataBaseHelper dbh = new DataBaseHelper(); 
 		return dbh.seleccionarBean(query);
 	}
+	//----------------------------------------------------------------------------------------
 	
 	public static void insertar(int cve, String nom, String email, String tel) throws DataBaseException
 	{
@@ -84,25 +92,5 @@ public class Proveedor
 		return dbh.seleccionarBean(query);
 	}
 	
-	public static Videojuego seleccionarVideojuego(int cve) throws DataBaseException
-	{
-		String query = "SELECT * FROM videojuegos WHERE cve_vid="+cve;
-		DataBaseHelper dbh = new DataBaseHelper();
-		List<Videojuego> lista = dbh.seleccionarBean(query);
-		//ESTO NOS PUEDE DAR UN UNCHECKED EXCEPTION
-		return lista.get(0);
-	}
-	
-	public int actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException
-	{
-		String query = "UPDATE videojuegos SET tit_vid ='"+titulo+"',pre_vid="+precio+","
-				+ "cveprov_vid="+cveprov+",inv_vid="+inventario+" WHERE cve_vid ="+cve;
-		
-		DataBaseHelper dbh = new DataBaseHelper();
-		
-		int n =dbh.modificarBean(query);
-		
-		return n;
-	}
 	
 }
