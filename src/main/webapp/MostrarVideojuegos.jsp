@@ -12,17 +12,16 @@
 <%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
 <%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
 <%@ page import ="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <form action="FiltrarVideojuegos.do" method = "GET">
 	<select name="Proveedor">
 		<option value="MostrarTodos">Mostrar todos</option>
 		<%
 		List<Proveedor> listaDeProveedores=null;
-		listaDeProveedores = (List<Proveedor>) request.getAttribute("listaDeProveedores");
-		for(Proveedor prov:listaDeProveedores)
-		{
-			%> <option value="<%=prov.getCve_prov()%>"><%=prov.getNom_prov() %></option> <%
-		}
-		%>
+		listaDeProveedores = (List<Proveedor>) request.getAttribute("listaDeProveedores");%>
+		<c:forEach var="Proveedor" items="${listaDeProveedores}">
+			<option value="${Proveedor.getCve_prov()}">${Proveedor.getNom_prov()}</option>
+		</c:forEach>
 	</select>
 	<input type="submit" value="Filtrar">
 </form>
