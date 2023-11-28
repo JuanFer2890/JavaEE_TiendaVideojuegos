@@ -34,7 +34,7 @@ public class Proveedor
 	{
 		this.nom_prov = nom_prov;
 	}
-
+	
 	public String getEmail_prov() 
 	{
 		return email_prov;
@@ -45,7 +45,7 @@ public class Proveedor
 		this.email_prov = email_prov;
 	}
 
-	public String getTel_prov() 
+	public String getTel_prov()
 	{
 		return tel_prov;
 	}
