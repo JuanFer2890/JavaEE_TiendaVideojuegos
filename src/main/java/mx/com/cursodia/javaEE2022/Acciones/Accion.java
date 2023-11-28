@@ -12,26 +12,20 @@ public abstract class Accion
 	public static Accion getAccion(String tipo)
 	{
 		Accion accion = null;
-		if(tipo.equals("/MostrarVideojuegos.do"))
-		{
-			accion = new MostrarVideojuegosAccion();
+		
+		String text = (Accion.class.getPackage()+"."+tipo.substring(1,tipo.lastIndexOf(".do"))+"Accion").substring(8);
+		//System.out.println(text); → mx.com.cursodia.javaEE2022.Acciones.MostrarVideojuegosAccion
+		
+		//System.out.println(text);
+		try {
+			Class c = Class.forName(text);
+			accion = (Accion) c.newInstance();
+			
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if(tipo.equals("/FiltrarVideojuegos.do"))
-		{
-			accion = new FiltrarVideojuegoAccion();
-		}
-		else if(tipo.equals("/Editar-NuevoVideojuego.do"))
-		{
-			accion = new Editar_NuevoVideojuegoAccion();
-		}
-		else if(tipo.equals("/EjecutarInserccionVideojuego.do"))
-		{
-			accion = new EjecutarInserccionVideojuegoAccion();
-		}
-		else if(tipo.equals("/SeleccionarJuegoParaBorrar.do"))
-		{
-			accion = new SeleccionarJuegoParaBorrarAccion();
-		}
+		
 		return accion;
 	}
 }

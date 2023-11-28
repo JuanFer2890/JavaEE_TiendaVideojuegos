@@ -9,7 +9,7 @@ import mx.com.cursodia.javaEE2022.Beans.Proveedor;
 import mx.com.cursodia.javaEE2022.Beans.Videojuego;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 
-public class FiltrarVideojuegoAccion extends Accion
+public class FiltrarVideojuegosAccion extends Accion
 {
 
 	@Override

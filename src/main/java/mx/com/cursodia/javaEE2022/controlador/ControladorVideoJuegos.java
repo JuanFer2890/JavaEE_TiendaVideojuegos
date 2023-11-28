@@ -27,6 +27,7 @@ public class ControladorVideoJuegos extends HttpServlet
 				
 		if(request.getServletPath().equals("/MostrarVideojuegos.do"))
 		{
+			//despachador = request.getRequestDispatcher("MostrarVideojuegos.jsp");
 			despachador = request.getRequestDispatcher(accion.getAccion("/MostrarVideojuegos.do").ejecutar(request, response));
 			despachador.forward(request, response);
 		} 
@@ -35,9 +36,9 @@ public class ControladorVideoJuegos extends HttpServlet
 			despachador = request.getRequestDispatcher(accion.getAccion("/FiltrarVideojuegos.do").ejecutar(request, response));
 			despachador.forward(request, response);
 		}
-		else if(request.getServletPath().equals("/Editar-NuevoVideojuego.do"))
+		else if(request.getServletPath().equals("/Editar_NuevoVideojuego.do"))
 		{//AQUI LLEGA DESDE MostrarVideojuegos.jsp
-			despachador = request.getRequestDispatcher(accion.getAccion("/Editar-NuevoVideojuego.do").ejecutar(request, response));
+			despachador = request.getRequestDispatcher(accion.getAccion("/Editar_NuevoVideojuego.do").ejecutar(request, response));
 			despachador.forward(request, response);
 		}
 		else if(request.getServletPath().equals("/EjecutarInserccionVideojuego.do"))
