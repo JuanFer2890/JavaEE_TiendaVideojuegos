@@ -15,7 +15,7 @@
 		<property name="show_sql">true</property><!-- cuando salga a produccion porle false porque me muestra las 
 		instrucciones que esta mandando hibernate -->
 		<!-- indicarle donde estan los beans y como se llaman -->
-		<mapping resource="mx/com/cursodia/javaEE2022/Beans/Videojuego.xml"/>
+		<mapping class="mx.com.cursodia.javaEE2022.Beans.Videojuego"/>
 		<!-- HAY QUE CREAR ESTE ARCHIVO EN BEANS -->
 		
 		<!--EN JAVA SE UTILIZAMOS <mapping class="semana3_beans.Proveedor"/> -->

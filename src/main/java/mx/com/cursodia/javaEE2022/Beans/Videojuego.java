@@ -2,6 +2,10 @@ package mx.com.cursodia.javaEE2022.Beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,8 +17,11 @@ import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseHelper;
 import mx.com.cursodia.javaEE2022.DataBaseH.HibernateHelper;
 
+@Entity
+@Table(name="videojuegos")
 public class Videojuego 
 {
+	@Id
 	private int cve_vid;
 	private String tit_vid;
 	private float pre_vid;
@@ -127,8 +134,9 @@ public class Videojuego
 		//UTILIZANDO HIBERNATE
 		SessionFactory factoriaS = HibernateHelper.getSessionFactory();
 		Session session = factoriaS.openSession();
-		Query query = session.createQuery("from Videojuego videojuegos");
+		Query query = session.createQuery("FROM Videojuego videojuegos");
 		List<Videojuego> lista = query.list();
+		session.close();
 		return lista;
 	}
 	
