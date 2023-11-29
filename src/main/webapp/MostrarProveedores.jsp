@@ -38,6 +38,6 @@
 %>
 <!-- Hacer un link para que podamos acceder desde aqui -->
 <a href="FormularioInsertarProveedor.jsp">Inserta Proveedor</a>
-<a href="MostrarVideojuegos.jsp">Mostrar Videojuegos</a>
+<a href="MostrarVideojuegos.do">Mostrar Videojuegos</a>
 </body>
 </html>

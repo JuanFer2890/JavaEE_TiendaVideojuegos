@@ -2,8 +2,13 @@ package mx.com.cursodia.javaEE2022.Beans;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
@@ -18,15 +23,31 @@ import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseHelper;
 import mx.com.cursodia.javaEE2022.DataBaseH.HibernateHelper;
 
 @Entity
-@Table(name="videojuegos")
+@Table(name="videojuegos") //nombre en SQL
 public class Videojuego 
 {
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cve_vid") //en SQL
 	private int cve_vid;
 	private String tit_vid;
 	private float pre_vid;
 	private int cveprov_vid;
 	private int inv_vid;
+	
+	//ESTO ES UN PROXI----------------------------------------------------------------------
+	@ManyToOne											//si me permite crear un nuevo proveedor desde aqui
+	@JoinColumn(name = "cveprov_vid", referencedColumnName="cve_prov", insertable=false, updatable = false, nullable = false)
+	private Proveedor proveedor;
+	//ESTO ES PARA QUE HIBERNATE AUTOMATICAMENTE INYECTE SUS INSTANCIAS DE PROVEEDOR---------
+	public Proveedor getProveedor()
+	{
+		return this.proveedor;
+	}
+	public void setProveedor(Proveedor proveedor)
+	{
+		this.proveedor = proveedor;
+	}
+	//--------------------------------------------------------------------------------------
 	
 	public Videojuego()
 	{

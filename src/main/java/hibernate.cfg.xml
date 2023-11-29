@@ -16,7 +16,7 @@
 		instrucciones que esta mandando hibernate -->
 		<!-- indicarle donde estan los beans y como se llaman -->
 		<mapping class="mx.com.cursodia.javaEE2022.Beans.Videojuego"/>
-		<!-- HAY QUE CREAR ESTE ARCHIVO EN BEANS -->
+		<mapping class="mx.com.cursodia.javaEE2022.Beans.Proveedor"/>
 		
 		<!--EN JAVA SE UTILIZAMOS <mapping class="semana3_beans.Proveedor"/> -->
 	</session-factory>
