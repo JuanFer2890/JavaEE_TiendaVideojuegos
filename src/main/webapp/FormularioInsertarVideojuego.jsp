@@ -77,7 +77,7 @@
 				<div class="card text-center">
 					<div class="card-body">
 					<h1>Formulario Modificar Videojuego</h1>
-					<form action ="EjecutarInserccionVideojuego.do?MOD&CVE=<%=V.getCve_vid()%>&TIT=<%=V.getTit_vid()%>&PRE=<%=V.getPre_vid()%>&CVEPROV=<%=V.getCvepro_vid()%>&INV=<%=V.getInv_vid()%>" method="GET" Class="mt-4">
+					<form action ="EjecutarInserccionVideojuego.do?MOD&CVE=<%=V.getCve_vid()%>&TIT=<%=V.getTit_vid()%>&PRE=<%=V.getPre_vid()%>&CVEPROV=<%=V.getCveprov_vid()%>&INV=<%=V.getInv_vid()%>" method="GET" Class="mt-4">
 						<input type="hidden" name="MOD" value="<%=true%>"><!-- Esto es para asignar un valor true a MOD -->
 						<div class="row">
 							<label for="CVE">Clave</label>

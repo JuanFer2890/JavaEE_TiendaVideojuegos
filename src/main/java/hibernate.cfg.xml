@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+	<session-factory><!-- manejador para conectarse		tipo de driver  -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost/gamers</property>
+		
+		<!-- en produccion NUNCA poner el root aqui  -->
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
+		<!-- es la cantidad de conexiones simultaneas que se puede realizar  -->
+		<property name="connection.pool_size">5</property>
+		<!-- como se van a llevar a cabo las consultas, este es el cambio que hace a mysql, hibernate -->
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!-- sirve para debuggear, es util en la fase de desarrollo -->
+		<property name="show_sql">true</property><!-- cuando salga a produccion porle false porque me muestra las 
+		instrucciones que esta mandando hibernate -->
+		<!-- indicarle donde estan los beans y como se llaman -->
+		<mapping resource="mx/com/cursodia/javaEE2022/Beans/Videojuego.xml"/>
+		<!-- HAY QUE CREAR ESTE ARCHIVO EN BEANS -->
+		
+		<!--EN JAVA SE UTILIZAMOS <mapping class="semana3_beans.Proveedor"/> -->
+	</session-factory>
+</hibernate-configuration>

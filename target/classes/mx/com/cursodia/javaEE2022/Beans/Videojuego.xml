@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="mx.com.cursodia.javaEE2022.Beans">
+	<class name="Videojuego" table="videojuegos"><!-- Nombre de la tabla en MySQL -->
+		<id name="cve_vid" type="int"/>
+		<property name="tit_vid" type="string" column="tit_vid"/>
+		<property name="pre_vid" type="float" column="pre_vid"/>
+		<property name="cveprov_vid" type="int" column="cveprov_vid"/>
+		<property name="inv_vid" type="int" column="inv_vid"/>
+	</class>
+</hibernate-mapping>

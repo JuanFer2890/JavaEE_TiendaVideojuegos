@@ -39,7 +39,7 @@
 			<td>${V.getCve_vid()}</td>
 			<td>${V.getTit_vid()}</td>
 			<td>${V.getPre_vid()}</td>
-			<td>${V.getCvepro_vid()}</td>
+			<td>${V.getCveprov_vid()}</td>
 			<td>${V.getInv_vid()}</td>
 			<td><input type="button" class="edit" value="Editar" onclick="location.href='Editar_NuevoVideojuego.do?CVE=${V.getCve_vid()}'"/></td>
 			<td><input type="button" class="delete" value="Borrar" onclick="location.href='SeleccionarJuegoParaBorrar.do?CVE=${V.getCve_vid()}'"/></td>
