@@ -22,7 +22,7 @@ public class HibernateHelper
 	//Que solamente se pueda usar una configuracion para que no se duplique
 	public static SessionFactory getSessionFactory()
 	{
-		System.out.println("Se entrega un sessionFactory");
+		System.out.println("Se entrega un Hibernate sessionFactory");
 		return sessionFactory;
 	}
 }

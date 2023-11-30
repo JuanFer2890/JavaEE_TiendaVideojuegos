@@ -3,11 +3,14 @@ package mx.com.cursodia.javaEE2022.Beans;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -20,6 +23,7 @@ import org.hibernate.query.Query;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseHelper;
 import mx.com.cursodia.javaEE2022.DataBaseH.HibernateHelper;
+import mx.com.cursodia.javaEE2022.DataBaseH.JPAHelper;
 
 @Entity
 @Table(name="proveedores")
@@ -111,7 +115,7 @@ public class Proveedor
 		DataBaseHelper dbh = new DataBaseHelper();
 		dbh.modificarBean(query);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		Transaction transaction = null;
@@ -132,6 +136,16 @@ public class Proveedor
 		{
 			session.close();
 		}
+		--------------------------------------------------------------------------------------------------------*/
+		
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		em.merge(new Proveedor(cve, nom, email, tel));
+		em.getTransaction().commit();
+		em.close();
+		//emf.close();
 	}
 	
 	public static List<Proveedor> buscarTodos() throws DataBaseException
@@ -141,12 +155,20 @@ public class Proveedor
 		DataBaseHelper dbh = new DataBaseHelper();
 		return dbh.seleccionarBean(query);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS = HibernateHelper.getSessionFactory();
 		Session session = factoriaS.openSession();
 		Query query = session.createQuery("FROM Proveedor proveedores");
 		List<Proveedor> lista = query.list();
 		session.close();
+		return lista;
+		--------------------------------------------------------------------------------------------------------*/
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();//"v" es un alias que se utiliza para referenciar la entidad Videojuego
+		TypedQuery<Proveedor> query = em.createQuery("SELECT v FROM Proveedor v",Proveedor.class);
+		List<Proveedor> lista = query.getResultList();
+		//emf.close();
+		em.close();
 		return lista;
 	}
 	

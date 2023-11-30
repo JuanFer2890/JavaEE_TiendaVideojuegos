@@ -1,15 +1,20 @@
 package mx.com.cursodia.javaEE2022.Beans;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -21,6 +26,7 @@ import org.hibernate.query.Query;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseHelper;
 import mx.com.cursodia.javaEE2022.DataBaseH.HibernateHelper;
+import mx.com.cursodia.javaEE2022.DataBaseH.JPAHelper;
 
 @Entity
 @Table(name="videojuegos") //nombre en SQL
@@ -34,7 +40,7 @@ public class Videojuego
 	private int cveprov_vid;
 	private int inv_vid;
 	
-	//ESTO ES UN PROXI----------------------------------------------------------------------
+	//ESTO ES UN PROXY----------------------------------------------------------------------
 	@ManyToOne											//si me permite crear un nuevo proveedor desde aqui
 	@JoinColumn(name = "cveprov_vid", referencedColumnName="cve_prov", insertable=false, updatable = false, nullable = false)
 	private Proveedor proveedor;
@@ -119,7 +125,7 @@ public class Videojuego
 		DataBaseHelper dbh = new DataBaseHelper();
 		dbh.modificarBean(query);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		Transaction transaction = null;
@@ -139,8 +145,17 @@ public class Videojuego
 		}finally
 		{
 			session.close();
-		}
+		}--------------------------------------------------------------------------------------------------------*/
 	
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		em.merge(new Videojuego(cve,titulo,precio,cveprov,inventario));
+		em.getTransaction().commit();
+		em.close();
+		//emf.close();
 		
 		
 	}
@@ -152,13 +167,24 @@ public class Videojuego
 		DataBaseHelper dbh = new DataBaseHelper();
 		return dbh.seleccionarBean(query);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS = HibernateHelper.getSessionFactory();
 		Session session = factoriaS.openSession();
 		Query query = session.createQuery("FROM Videojuego videojuegos");
 		List<Videojuego> lista = query.list();
 		session.close();
-		return lista;
+		return lista;-----------------------------------------------------------------------------------------------*/
+		
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();//"v" es un alias que se utiliza para referenciar la entidad Videojuego
+		TypedQuery<Videojuego> query = em.createQuery("SELECT v FROM Videojuego v JOIN FETCH v.proveedor",Videojuego.class);
+		List<Videojuego> lista = query.getResultList();//el fetch es para respetar la integridad referencial
+		em.close();									   //"proveedor" es el nombre del proxy en la linea 44
+		
+		return lista.stream() //este stream es para ordenarlos por id porque jpa los trae desordenados
+				.sorted(Comparator.comparingInt(Videojuego::getCve_vid))
+				.collect(Collectors.toList());
 	}
 	
 	
@@ -171,7 +197,7 @@ public class Videojuego
 		//ESTO NOS PUEDE DAR UN UNCHECKED EXCEPTION
 		return lista.get(0);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		Videojuego V = null;
@@ -188,6 +214,14 @@ public class Videojuego
 		{
 			session.close();
 		}
+		return V;--------------------------------------------------------------------------------------------------*/
+		
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();
+		Videojuego V = em.find(Videojuego.class,cve);
+		em.close();
+		//emf.close();
 		return V;
 	}
 	
@@ -199,7 +233,7 @@ public class Videojuego
 		List<Videojuego> lista = dbh.seleccionarBean(query);
 		return lista;*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		List<Videojuego> lista = null;
@@ -217,6 +251,15 @@ public class Videojuego
 		{
 			session.close();
 		}
+		return lista;-------------------------------------------------------------------------------------------*/
+		
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();//"v" es un alias que se utiliza para referenciar la entidad Videojuego
+		TypedQuery<Videojuego> query = em.createQuery("SELECT v FROM Videojuego v WHERE v.cveprov_vid ="+cveprov, Videojuego.class);
+		List<Videojuego> lista = query.getResultList();
+		//emf.close();
+		em.close();
 		return lista;
 	}
 	
@@ -227,7 +270,7 @@ public class Videojuego
 		DataBaseHelper dbh = new DataBaseHelper();
 		dbh.modificarBean(query);*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		Transaction transaction = null;
@@ -248,6 +291,23 @@ public class Videojuego
 		{
 			session.close();
 		}
+		--------------------------------------------------------------------------------------------------------*/
+		
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		try {
+			Videojuego V = em.find(Videojuego.class,cve);
+			em.remove(V);
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		em.getTransaction().commit();
+		em.close();
+		//emf.close();
 	}
 	
 	public static void actualizarVideoJuego(int cve, String titulo, float precio, int cveprov, int inventario) throws DataBaseException
@@ -260,7 +320,7 @@ public class Videojuego
 		int n =dbh.modificarBean(query);
 		return n;*/
 		
-		//UTILIZANDO HIBERNATE
+		/*UTILIZANDO HIBERNATE-------------------------------------------------------------------------------------
 		SessionFactory factoriaS;
 		Session session = null;
 		Transaction transaction = null;
@@ -280,6 +340,34 @@ public class Videojuego
 		{
 			session.close();
 		}
+		--------------------------------------------------------------------------------------------------------*/
+		
+		//UTILIZANDO JPA
+		EntityManagerFactory emf = JPAHelper.getJPAFactory();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		
+		try {
+			Videojuego juegoEnBD = em.find(Videojuego.class,cve);
+			
+			juegoEnBD.setTit_vid(titulo);
+			juegoEnBD.setPre_vid(precio);
+			juegoEnBD.setCveprov_vid(cveprov);
+			juegoEnBD.setInv_vid(inventario);
+			
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		//No es necesario llamar explícitamente al método persist() 
+		//para actualizar una entidad en JPA, ya que los cambios realizados 
+		//en la entidad dentro del contexto de persistencia serán rastreados automáticamente
+		
+		//em.merge(juego);
+		em.getTransaction().commit();
+		em.close();
+		//emf.close();
 	}
 	
 }
