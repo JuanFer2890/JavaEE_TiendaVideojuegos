@@ -3,7 +3,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
 	<!--NOMBRE QUE UTILIZAMOS EN JPAPruebas-->
-	<persistence-unit name="JavaEE2022">
+	<persistence-unit name="JavaEE2022"> <!-- UNIDAD DE PERSISTENCIA (PUEDE HABER MAS DE UNA) -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>mx.com.cursodia.javaEE2022.Beans.Videojuego</class>
 		<class>mx.com.cursodia.javaEE2022.Beans.Proveedor</class>
