@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import mx.com.cursodia.javaEE2022.Beans.Videojuego;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.dao.VideojuegoDAO;
+import mx.com.cursodia.javaEE2022.dao.VideojuegoDAOJPAImpl;
 
 // HEREDAR DE Accion Y AGREGAR METODOS SIN IMPLEMENTAR
 public class EjecutarInserccionVideojuegoAccion extends Accion
@@ -22,12 +23,12 @@ public class EjecutarInserccionVideojuegoAccion extends Accion
 		try {
 			if(Boolean.parseBoolean(request.getParameter("MOD")))
 			{
-				new VideojuegoDAO().actualizarVideoJuego(cve, titulo, precio, cveprov, inventario);
+				new VideojuegoDAOJPAImpl().actualizarVideoJuego(cve, titulo, precio, cveprov, inventario);
 				
 			}
 			else
 			{
-				new VideojuegoDAO().insertar(cve, titulo, precio, cveprov, inventario);
+				new VideojuegoDAOJPAImpl().insertar(cve, titulo, precio, cveprov, inventario);
 			}
 		} 
 		catch (DataBaseException e) {

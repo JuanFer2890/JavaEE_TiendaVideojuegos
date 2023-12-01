@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import mx.com.cursodia.javaEE2022.Beans.Proveedor;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
 import mx.com.cursodia.javaEE2022.dao.ProveedorDAO;
+import mx.com.cursodia.javaEE2022.dao.ProveedorDAOJPAImpl;
 
 public class Editar_NuevoVideojuegoAccion extends Accion
 {
@@ -16,7 +17,7 @@ public class Editar_NuevoVideojuegoAccion extends Accion
 	public String ejecutar(HttpServletRequest request, HttpServletResponse responese) {
 		List<Proveedor> listaDeProveedores;
 		try {
-			listaDeProveedores = new ProveedorDAO().buscarTodos();
+			listaDeProveedores = new ProveedorDAOJPAImpl().buscarTodos();
 			request.setAttribute("listaDeProveedores", listaDeProveedores);
 		} catch (DataBaseException e) {
 			// TODO Auto-generated catch block

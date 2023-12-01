@@ -35,11 +35,11 @@ public class Videojuego
 {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cve_vid") //en SQL
-	private int cve_vid;
+	private Integer cve_vid;
 	private String tit_vid;
 	private float pre_vid;
-	private int cveprov_vid;
-	private int inv_vid;
+	private Integer cveprov_vid;
+	private Integer inv_vid;
 	
 	//ESTO ES UN PROXY----------------------------------------------------------------------
 	@ManyToOne											//si me permite crear un nuevo proveedor desde aqui
@@ -60,7 +60,7 @@ public class Videojuego
 	{
 	}
 	
-	public Videojuego(int cve_vid, String tit_vid, float pre_vid, int cvepro_vid, int inv_vid) 
+	public Videojuego(Integer cve_vid, String tit_vid, float pre_vid, Integer cvepro_vid, Integer inv_vid) 
 	{
 		this.cve_vid = cve_vid;
 		this.tit_vid = tit_vid;
@@ -68,7 +68,7 @@ public class Videojuego
 		this.cveprov_vid = cvepro_vid;
 		this.inv_vid = inv_vid;
 	}
-	public void setCve_vid(int cve_vid) 
+	public void setCve_vid(Integer cve_vid) 
 	{
 		this.cve_vid = cve_vid;
 	}
@@ -89,24 +89,24 @@ public class Videojuego
 	{
 		this.pre_vid = pre_vid;
 	}
-	public int getCveprov_vid()
+	public Integer getCveprov_vid()
 	{
 		return cveprov_vid;
 	}
 	
-	public void setCveprov_vid(int cvepro_vid) 
+	public void setCveprov_vid(Integer cvepro_vid) 
 	{
 		this.cveprov_vid = cvepro_vid;
 	}
-	public int getInv_vid() 
+	public Integer getInv_vid() 
 	{
 		return inv_vid;
 	}
-	public void setInv_vid(int inv_vid) 
+	public void setInv_vid(Integer inv_vid) 
 	{
 		this.inv_vid = inv_vid;
 	}
-	public int getCve_vid() 
+	public Integer getCve_vid() 
 	{
 		return cve_vid;
 	}

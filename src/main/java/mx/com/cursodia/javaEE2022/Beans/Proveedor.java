@@ -31,7 +31,7 @@ public class Proveedor
 {
 	@Id
 	@PrimaryKeyJoinColumn(name = "cve_prov")
-	private int cve_prov;
+	private Integer cve_prov;
 	private String nom_prov;
 	private String email_prov;
 	private String tel_prov;
@@ -48,7 +48,7 @@ public class Proveedor
 		
 	}
 
-	public Proveedor(int cve_prov, String nom_prov, String email_prov, String tel_prov) 
+	public Proveedor(Integer cve_prov, String nom_prov, String email_prov, String tel_prov) 
 	{
 		this.cve_prov = cve_prov;
 		this.nom_prov = nom_prov;
@@ -86,7 +86,7 @@ public class Proveedor
 		this.tel_prov = tel_prov;
 	}
 
-	public int getCve_prov() 
+	public Integer getCve_prov() 
 	{
 		return cve_prov;
 	}
