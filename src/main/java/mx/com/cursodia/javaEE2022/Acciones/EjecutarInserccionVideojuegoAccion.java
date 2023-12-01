@@ -23,15 +23,15 @@ public class EjecutarInserccionVideojuegoAccion extends Accion
 		try {
 			if(Boolean.parseBoolean(request.getParameter("MOD")))
 			{
-				new VideojuegoDAOJPAImpl().actualizarVideoJuego(cve, titulo, precio, cveprov, inventario);
+				new VideojuegoDAOJPAImpl().actualizarObjeto(new Videojuego(cve, titulo, precio, cveprov, inventario));
 				
 			}
 			else
 			{
-				new VideojuegoDAOJPAImpl().insertar(cve, titulo, precio, cveprov, inventario);
+				new VideojuegoDAOJPAImpl().insertarObjeto(new Videojuego(cve, titulo, precio, cveprov, inventario));
 			}
 		} 
-		catch (DataBaseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

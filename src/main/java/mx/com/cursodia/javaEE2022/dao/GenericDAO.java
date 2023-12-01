@@ -5,9 +5,14 @@ import java.util.List;
 
 public interface GenericDAO  <T, Id extends Serializable>
 {
-	T seleccionarObjeto(Id id);
-	List<T> buscarTodos();
-	void borrarObjeto(T objeto);
 	void insertarObjeto(T objeto);
+	
+	List<T> buscarTodos();
+	
 	void actualizarObjeto(T objeto);
+	
+	void borrarObjeto(T objeto);
+	
+	T seleccionarObjeto(Id id);
 }
+

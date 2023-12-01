@@ -71,7 +71,7 @@
 			else
 			{
 				int cve = Integer.parseInt(clave);
-				Videojuego V = new VideojuegoDAOJPAImpl().seleccionarVideojuego(cve);
+				Videojuego V = new VideojuegoDAOJPAImpl().seleccionarObjeto(cve);
 				%>
 				<div class="container-pt-4">
 				<div class="row">
