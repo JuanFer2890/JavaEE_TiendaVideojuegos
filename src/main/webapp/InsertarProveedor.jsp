@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="Error.jsp"%>
 <!-- Imports -->	<!--  esto es para insertar codigo de java -->
-<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
+<%@ page import ="mx.com.cursodia.javaEE2022.dao.ProveedorDAOJPAImpl"%>
 <%@ page import ="mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException"%>
 
 <%
@@ -11,7 +11,7 @@
 	String email = request.getParameter("EMAIL");
 	String tel = request.getParameter("TEL");
 	
-	Proveedor.insertar(cve, nombre, email, tel);
+	new ProveedorDAOJPAImpl().insertar(cve, nombre, email, tel);
 	
 	response.sendRedirect("MostrarProveedores.jsp");
 %>

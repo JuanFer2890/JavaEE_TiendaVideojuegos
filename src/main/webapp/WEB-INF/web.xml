@@ -7,11 +7,6 @@
   	<location>/Error.jsp</location>
   </error-page>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>MostrarVideojuegos.do</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
     <welcome-file>MostrarVideojuegos.do</welcome-file>
   </welcome-file-list>
   
@@ -25,5 +20,14 @@
   	<url-pattern>*.do</url-pattern> 
   	<!-- TODOS LOS ELEMENTOS QUE LANCEN UN DO, VAN A PASAR POR ESTE CONTROLADOR-->
   </servlet-mapping>
+  
+  <!-- CONFIGURACION DE SPRING -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:ApplicationContext.xml</param-value>
+  </context-param>
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
   
 </web-app>

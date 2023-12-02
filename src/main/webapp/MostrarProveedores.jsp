@@ -12,11 +12,12 @@
     <option value="todos">Todos</option>
  </select>
  <br>
+<%@ page import ="mx.com.cursodia.javaEE2022.dao.ProveedorDAOJPAImpl"%>
 <%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
 <%@ page import ="java.util.List"%>
 <%
 	
-	List<Proveedor> lista = Proveedor.buscarTodos();
+	List<Proveedor> lista = new ProveedorDAOJPAImpl().buscarTodos();
 	
 	//recorrer
 	for(Proveedor v:lista)
