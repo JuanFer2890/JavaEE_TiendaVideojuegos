@@ -16,7 +16,7 @@
 		<%@ page import= "java.util.List" %>
 		<%@ page import ="java.util.stream.Collectors"%>
 		<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Videojuego"%>
-		<%@ page import ="mx.com.cursodia.javaEE2022.dao.VideojuegoDAOJPAImpl"%>
+		<%@ page import ="mx.com.cursodia.javaEE2022.IOC.VideojuegoDAOFactory"%>
 		<%@ page import ="mx.com.cursodia.javaEE2022.Beans.Proveedor"%>
 		<%	
 			String clave = request.getParameter("CVE");
@@ -71,7 +71,7 @@
 			else
 			{
 				int cve = Integer.parseInt(clave);
-				Videojuego V = new VideojuegoDAOJPAImpl().seleccionarObjeto(cve);
+				Videojuego V = VideojuegoDAOFactory.getInstance().seleccionarObjeto(cve);
 				%>
 				<div class="container-pt-4">
 				<div class="row">

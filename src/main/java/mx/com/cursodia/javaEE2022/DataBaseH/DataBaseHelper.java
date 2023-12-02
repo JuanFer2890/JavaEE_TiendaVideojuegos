@@ -33,6 +33,11 @@ public class DataBaseHelper <T>
 	public Statement getStm() {
 		return stm;
 	}
+	
+	public DataBaseHelper()
+	{
+		System.out.println("Se solicita un DataBaseHelper");
+	}
 
 	public int modificarBean(String query) throws DataBaseException
 	{

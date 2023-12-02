@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import mx.com.cursodia.javaEE2022.Beans.Proveedor;
 import mx.com.cursodia.javaEE2022.Beans.Videojuego;
 import mx.com.cursodia.javaEE2022.DataBaseH.DataBaseException;
+import mx.com.cursodia.javaEE2022.IOC.VideojuegoDAOFactory;
 import mx.com.cursodia.javaEE2022.dao.ProveedorDAO;
 import mx.com.cursodia.javaEE2022.dao.ProveedorDAOJPAImpl;
 import mx.com.cursodia.javaEE2022.dao.VideojuegoDAO;
@@ -20,7 +21,7 @@ public class MostrarVideojuegosAccion extends Accion
 	public String ejecutar(HttpServletRequest request, HttpServletResponse responese) {
 
 		try {
-			List<Videojuego> listaDeVideojuegos = new VideojuegoDAOJPAImpl().buscarTodos();
+			List<Videojuego> listaDeVideojuegos = VideojuegoDAOFactory.getInstance().buscarTodos();
 			List<Proveedor> listaDeProveedores = new ProveedorDAOJPAImpl().buscarTodos();
 			
 			//A la peticion (request) le vamos a asignar un atributo que es la lista de videojuegos que sacamos.
