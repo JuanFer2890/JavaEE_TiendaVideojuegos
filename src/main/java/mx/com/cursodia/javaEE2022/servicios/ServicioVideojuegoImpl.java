@@ -18,8 +18,9 @@ public class ServicioVideojuegoImpl implements ServicioVideojuego
 	private VideojuegoDAO videojuegoDAO = null;
 	private ProveedorDAO proveedorDAO = null;
 
-	@Autowired //el framework lo va a injectar automaticamente cuando sea necesario nosotros no le vamos a 
-	//dar valor nunca, sino que el mismo framework ya sabe que debe de tener control de este objeto y crear la instancia
+	@Autowired //el framework lo va a injectar automaticamente al cargar el archivo de configuracion
+	//cuando sea necesario. Nosotros no le vamos a dar valor nunca, sino que el mismo framework ya sabe que
+	//debe de tener control de este objeto y crear la instancia. Esto es IOC
 	private RepositorioVideojuego repositorio;
 	
 	public ServicioVideojuegoImpl()
