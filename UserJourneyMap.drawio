@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-12-02T06:23:37.584Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.1 Chrome/112.0.5615.204 Electron/24.6.1 Safari/537.36" etag="q_nq_bt1jK9mlBpLBV-W" version="21.6.1" type="device">
+<mxfile host="Electron" modified="2023-12-02T08:32:43.872Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.1 Chrome/112.0.5615.204 Electron/24.6.1 Safari/537.36" etag="xdaZMIMu_XvUgXlxOzbM" version="21.6.1" type="device">
   <diagram name="Page-1" id="rfxMBGMzLiaKGtnfFLGP">
     <mxGraphModel dx="5150" dy="3235" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -962,7 +962,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rxSsNwRwmFgxMqNqAkNi-37" value="persistence.xml" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-2200" y="1299" width="360" height="150" as="geometry" />
+          <mxGeometry x="-2200" y="1298" width="360" height="150" as="geometry" />
         </mxCell>
         <mxCell id="rxSsNwRwmFgxMqNqAkNi-38" value="Establece los parametros de configuracion para iniciar JPA" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="rxSsNwRwmFgxMqNqAkNi-37">
           <mxGeometry y="26" width="360" height="44" as="geometry" />
@@ -974,7 +974,7 @@
           <mxGeometry y="78" width="360" height="72" as="geometry" />
         </mxCell>
         <mxCell id="rxSsNwRwmFgxMqNqAkNi-41" value="JPAHelper.java" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1740" y="1289" width="270" height="140" as="geometry" />
+          <mxGeometry x="-1740" y="1288" width="270" height="140" as="geometry" />
         </mxCell>
         <mxCell id="rxSsNwRwmFgxMqNqAkNi-42" value="Clase factoria encargada de crear y entregar factorias de JPA mediante el metodo getJPAFactory();" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="rxSsNwRwmFgxMqNqAkNi-41">
           <mxGeometry y="26" width="270" height="64" as="geometry" />
