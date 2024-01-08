@@ -11,7 +11,7 @@ public class VideojuegoDAOFactory
 	//que se pueda devolver como si fuera del mismo tipo
 	public static VideojuegoDAO getInstance()
 	{
-		String type = "Hibernate";
+		String type = "JDBC";
 		if(type.equals("Hibernate")) 
 		{
 			return new VideojuegoDAOHibernateImpl();
